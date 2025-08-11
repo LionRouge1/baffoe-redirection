@@ -54,6 +54,6 @@ if (isset($_COOKIE['user_location'])) {
   <p>Thank you for visiting our site!</p>
   <footer>
     <p>&copy; <?php echo date("Y"); ?> Baffo. All rights reserved.</p>
-  </footer>
+  </footer> 
 </body>
 </html>
